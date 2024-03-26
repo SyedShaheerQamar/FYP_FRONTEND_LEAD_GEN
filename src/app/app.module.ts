@@ -91,7 +91,7 @@ import { provideRouter } from '@angular/router';
   providers: [
     AuthGuard,
     DatePipe,
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     // { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }, // Register the AuthInterceptor
     // provideRouter(routes, withHashLocation()),
 ],

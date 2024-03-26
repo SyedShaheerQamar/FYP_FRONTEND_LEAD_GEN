@@ -45,7 +45,7 @@ export class AuthguardService {
         return true;
       }
       else {
-        this.router.navigate(['/unauthorized']);
+        this.router.navigate(['/login']);
         return false;
       }
     } else {

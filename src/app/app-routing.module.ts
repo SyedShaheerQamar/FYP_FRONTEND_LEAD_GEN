@@ -13,7 +13,7 @@ const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'login',
@@ -22,17 +22,17 @@ const routes: Routes = [
   {
     path: 'home',
     component: DashboardComponent,
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'category',
     component: CategoryListComponent,
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'add-category',
     component: AddCategoryComponent,
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'request',
