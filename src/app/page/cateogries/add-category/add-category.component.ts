@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem, MessageService } from 'primeng/api';
-import { CategoryService } from '../category.service';
 import { Router } from '@angular/router';
+import { CategoryService } from '../service/category.service';
 
 @Component({
   selector: 'app-add-driver',

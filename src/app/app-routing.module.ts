@@ -37,12 +37,12 @@ const routes: Routes = [
   {
     path: 'request',
     component: RequestListComponent,
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'user',
     component: UserListComponent,
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   }
 ];
 

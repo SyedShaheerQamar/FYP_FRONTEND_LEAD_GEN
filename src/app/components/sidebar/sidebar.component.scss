@@ -22,7 +22,7 @@
 nav.main-menu.expanded {
   width: 250px;
   overflow: visible;
-  background-image: linear-gradient(180deg, rgba(101,216,188,255), rgba(2,72,133,255));
+  background-image: linear-gradient(180deg, rgb(102, 219, 240), rgba(53, 147, 215)); //linear-gradient(180deg, rgba(101,216,188,255), rgba(2,72,133,255));
   color: white;
   overflow-y: auto;
   overflow-x: hidden;
@@ -44,7 +44,7 @@ nav.main-menu.expanded {
 
 .main-menu {
   color: white;
-  background-image: linear-gradient(180deg, rgba(101,216,188,255), rgba(2,72,133,255));
+  background-image: linear-gradient(180deg, rgb(102, 219, 240), rgba(53, 147, 215));
   border-right: 1px solid #e5e5e5;
   height: 100vh;
   position: fixed;

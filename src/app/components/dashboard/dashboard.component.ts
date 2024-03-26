@@ -1,5 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuItem } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
+import { Observable } from 'rxjs';
+import { Category } from 'src/app/model/category';
+import { UserInformation } from 'src/app/model/user-information';
+import { UserRequest } from 'src/app/model/user-request';
+import { CategoryService } from 'src/app/page/cateogries/service/category.service';
+import { RequestService } from 'src/app/page/request/service/request.service';
+import { UserService } from 'src/app/page/user/service/user.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,18 +15,26 @@ import { MenuItem } from 'primeng/api';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+    http: any;
 
-  constructor() { }
+  constructor(private userService: UserService, private userRequestService:RequestService, private categoryService:CategoryService) { }
   items: MenuItem[] | undefined;
   data: any;
   options: any;
   data1: any;
   options1: any;
+  userLength: any;
+  requestLength: any;
+  categoryLength: any;
+  url=environment.baseurl;
 
   ngOnInit(): void {
     this.items = [{ label: 'Dash Board'}];
     const documentStyle = getComputedStyle(document.documentElement);
     const textColor = documentStyle.getPropertyValue('--text-color');
+    this.getAllUser();
+    this.getAllUserRequest();
+    this.getCategory();
 
     this.data = {
         labels: ['A', 'B', 'C'],
@@ -107,5 +123,27 @@ export class DashboardComponent implements OnInit {
         }
     };
   }
+
+  getAllUser(){
+    this.userService.GetAllUserFromDatabase().subscribe((res:UserInformation[]) => {
+        this.userLength = res.length;
+
+    });
+   }
+
+   getAllUserRequest(){
+    this.userRequestService.getAll().subscribe((res:UserRequest[])=>{
+      this.requestLength=res.length;
+      
+    })
+  }
+
+  getCategory(){
+    this.categoryService.getAllCategory().subscribe((res:Category[])=>{    
+     this.categoryLength=res.length;
+     
+     
+    })
+   }
 
 }

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, interval, startWith, switchMap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { UserRequest } from 'src/app/model/user-request';
 
@@ -12,6 +12,15 @@ export class RequestService {
   url=environment.baseurl;
 
   getAllUserRequest():Observable<UserRequest[]>{
+    return interval(30000) // Poll every 30 seconds
+      .pipe(
+        startWith(0),
+        switchMap(() => this.http.get<UserRequest[]>(this.url.concat('/userRequest/getAllRequests')))
+      );
+    // return this.http.get<UserRequest[]>(this.url.concat('/userRequest/getAll'));
+  }
+
+  getAll():Observable<UserRequest[]>{
     return this.http.get<UserRequest[]>(this.url.concat('/userRequest/getAll'));
   }
 

@@ -3,7 +3,6 @@ import { MenuItem, MessageService } from 'primeng/api';
 import { RequestService } from '../service/request.service';
 // import { Location } from '../../../model/Location'
 import { UserRequest } from 'src/app/model/user-request';
-import { RecordService } from 'src/app/model/record-service';
 
 @Component({
   selector: 'app-location-list',
@@ -14,7 +13,7 @@ import { RecordService } from 'src/app/model/record-service';
 export class RequestListComponent implements OnInit {
 
 
-  constructor(private userRequestService:RequestService,private messageService:MessageService, private recordService: RecordService) { }
+  constructor(private userRequestService:RequestService,private messageService:MessageService) { }
  
   items: MenuItem[] | undefined;
   visible: boolean = false;
@@ -25,14 +24,7 @@ export class RequestListComponent implements OnInit {
 
   ngOnInit() {
       this.items = [{ label: 'Request List'}];
-      this.recordService.getRecords().subscribe(records => {
-        console.log(records);
-        
-        this.request = records;
-      },error=>{
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.body });
-      });
-      // this.getAllUserRequest();
+      this.getAllUserRequest();
   }
   
   getAllUserRequest(){
