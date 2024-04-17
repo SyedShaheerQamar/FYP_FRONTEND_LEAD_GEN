@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MenuItem, MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 import { CategoryService } from '../service/category.service';
+import { Dropdown } from 'primeng/dropdown';
+import { Category } from 'src/app/model/category';
 
 @Component({
   selector: 'app-add-driver',
@@ -10,11 +12,16 @@ import { CategoryService } from '../service/category.service';
   providers:[MessageService],
 })
 export class AddCategoryComponent implements OnInit {
+
+  @ViewChild('iconDropdown') iconDropdown!: Dropdown;
+  @ViewChild('backgroundDropdown') backgroundDropdown!: Dropdown;
+
   items: MenuItem[] | undefined;
   
-  constructor(private driverService:CategoryService,private messageService:MessageService,private router:Router) { }
+  constructor(private categoryService:CategoryService,private messageService:MessageService,private router:Router) { }
 
   Categoryname!:string;
+  category!: Category;
 
   icons: any = [
     { name: 'TEST 1' },
@@ -41,8 +48,18 @@ export class AddCategoryComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.selectedIcon, this.selectedBackground, this.Categoryname);
+    this.category = {
+      id: null,
+      icons: this.iconDropdown.value.name,
+      backgroundColor: this.backgroundDropdown.value.name,
+      categoryName: this.Categoryname
+    };
+    
+    this.categoryService.saveCateogry(this.category).subscribe((res: any) => {
+      console.log(res);
+      this.router.navigate(['/category']);
+    })
   }
-  
+
 
 }

@@ -1,6 +1,6 @@
 export interface Category {
     id: number|null|undefined,
-    name: string|null|undefined,
+    categoryName: string|null|undefined,
     icons: string|null|undefined,
-    background: string|null|undefined,
+    backgroundColor: string|null|undefined,
 }

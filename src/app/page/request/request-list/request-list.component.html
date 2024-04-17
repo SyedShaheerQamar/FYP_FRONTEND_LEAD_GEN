@@ -49,10 +49,10 @@
                   <td class="text-center">{{ request.approvedByAdmin }}</td>
                   <td class="text-center">{{ request.price }}</td>
                   <td class="text-center">{{ request.category==[]?request.category:"Not available" }}</td>
-                  <td class="text-center">{{ request.bids==[]?request.bids:"Not bids" }}</td>
+                  <td class="text-center">{{ request.bids==[]?request.bids:"No bids" }}</td>
 
                   <td class="text-center"> 
-                    <p-button (click)="showDialogForApprove(request.id)" icon="bi bi-check2" class='mr' styleClass="p-button-rounded p-button-success p-button-text p-button-raised">
+                    <p-button *ngIf="!request.approvedByAdmin" (click)="showDialogForApprove(request.id)" icon="bi bi-check2" class='mr' styleClass="p-button-rounded p-button-success p-button-text p-button-raised">
                      
                     </p-button>
                      <p-button (click)="showDialog(request.id)" icon="bi bi-trash" class='ml' styleClass="p-button-rounded p-button-danger p-button-text p-button-raised">

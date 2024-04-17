@@ -26,10 +26,9 @@ export class UserListComponent implements OnInit {
   }
 
   getAllUser(){
-    this.userService.GetAllUserFromDatabase().subscribe((res:UserInformation[]) => {
-      console.log(res);
-      
+    this.userService.GetAllUserFromDatabase().subscribe((res:UserInformation[]) => {      
       this.userInfo = res;
+      this.addElipses(this.userInfo);
       
     },error=>{
         this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.body });
@@ -53,14 +52,34 @@ export class UserListComponent implements OnInit {
   }
 
   showUserByStatus(status : number){
-    this.userService.GetUserByStatus(status).subscribe((res:UserInformation[]) => {      
-      debugger
-      console.log(res);
-    
+    this.userService.GetUserByStatus(status).subscribe((res:UserInformation[]) => {       
       this.userInfo = res;
+      this.addElipses(this.userInfo);
+      if(status == 1){
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Showing Active Users'});
+      }else{
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Showing Inactive Users'});
+      }
     },error=>{
-      this.messageService.add({ severity: 'error', summary: 'No User Available', detail: error.error.body });
+      if(status == 1){
+        this.messageService.add({ severity: 'error', summary: 'No Active User Available', detail: error.error.body });
+      }else{
+        this.messageService.add({ severity: 'error', summary: 'No Inactive User Available', detail: error.error.body });
+      }
+      
     });
+  }
+
+  addElipses(user : UserInformation[]){
+    for(var i=0; i<this.userInfo.length; i++){
+      console.log(this.userInfo[i].deviceId);
+      let val = new String(this.userInfo[i].deviceId);
+      
+      if(val.length > 30){
+        this.userInfo[i].deviceId = val.slice(0, 20) + "...";          
+      }
+    }
+    
   }
   
 }

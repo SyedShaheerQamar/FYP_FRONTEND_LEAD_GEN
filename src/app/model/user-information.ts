@@ -1,5 +1,5 @@
 export interface UserInformation {
-    deviceId: number|null|undefined,
+    deviceId: string|null|undefined,
     email: string|null|undefined,
     firstName:string|null|undefined,
     id:number|null|undefined,

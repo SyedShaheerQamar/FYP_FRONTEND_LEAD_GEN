@@ -28,10 +28,8 @@ export class CategoryListComponent implements OnInit {
   }
   
   getCategory(){
-   this.categoryService.getAllCategory().subscribe((res:Category[])=>{    
-    this.itemCategory=res;
-    console.log(this.itemCategory);
-    
+   this.categoryService.getAllCategory().subscribe((res:Category[])=>{
+    this.itemCategory=res;    
     
    },error=>{
     this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.body });
