@@ -53,9 +53,13 @@ export class RequestListComponent implements OnInit {
   }
 
   approveRequestByID(id:number){
-    console.log(id);
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Request is approved on id '});
-    this.approveVisible = false;
+    this.userRequestService.adminApproveUserRequsetByID(id).subscribe((res)=>{
+      this.getAllUserRequest();
+      this.approveVisible = false;
+      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Request is approved on id '+res!.id!.toString()});
+    },error=>{
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.body });
+    });
   }
 
   showDialogForApprove(id:number){

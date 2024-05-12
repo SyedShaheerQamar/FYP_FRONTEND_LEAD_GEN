@@ -39,7 +39,7 @@ export class CategoryListComponent implements OnInit {
   deleteCategoryByID(id:number){
     this.categoryService.deleteCategoryByID(id).subscribe((res:Category)=>{
       this.visible = false;
-      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Driver is deleted on id '+res!.id!.toString()});
+      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Driver is deleted on id '+res.id});
       this.getCategory();
     },error=>{
       this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.body });

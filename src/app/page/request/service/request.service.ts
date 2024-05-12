@@ -27,4 +27,8 @@ export class RequestService {
   deleteUserRequsetByID(id:number):Observable<UserRequest>{
     return this.http.delete<UserRequest>(this.url.concat('/userRequest/delete/',id.toString()));
   }
+
+  adminApproveUserRequsetByID(id:number):Observable<UserRequest>{
+    return this.http.put<UserRequest>(this.url.concat('/userRequest/setApproval/',id.toString()), null);
+  }
 }
