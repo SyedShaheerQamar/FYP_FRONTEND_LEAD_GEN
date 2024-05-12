@@ -9,14 +9,6 @@
             <p-breadcrumb class="max-w-full" [model]="items"></p-breadcrumb>
         </div>
         <div class="body-card">
-          <div class="order-body">
-            <div class="order-search-panel">
-              <input 
-              type="text" 
-              placeholder="Search By Request" 
-              class="order-search form-control">
-            </div>
-          </div>
           <p-toast></p-toast>
             <div class="table-head">
                 <p-toolbar>
@@ -48,7 +40,7 @@
                   <td class="text-center">{{ request.approvedBySystem }}</td>
                   <td class="text-center">{{ request.approvedByAdmin }}</td>
                   <td class="text-center">{{ request.price }}</td>
-                  <td class="text-center">{{ request.category==[]?request.category:"Not available" }}</td>
+                  <td class="text-center">{{ request.categoryName!=null?request.categoryName:"Not available" }}</td>
                   <td class="text-center">{{ request.bids==[]?request.bids:"No bids" }}</td>
 
                   <td class="text-center"> 

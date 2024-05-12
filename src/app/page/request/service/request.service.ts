@@ -17,7 +17,6 @@ export class RequestService {
         startWith(0),
         switchMap(() => this.http.get<UserRequest[]>(this.url.concat('/userRequest/getAllRequests')))
       );
-    // return this.http.get<UserRequest[]>(this.url.concat('/userRequest/getAll'));
   }
 
   getAll():Observable<UserRequest[]>{

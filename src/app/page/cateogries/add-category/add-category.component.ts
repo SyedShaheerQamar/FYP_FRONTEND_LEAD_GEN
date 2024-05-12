@@ -17,6 +17,7 @@ export class AddCategoryComponent implements OnInit {
   @ViewChild('backgroundDropdown') backgroundDropdown!: Dropdown;
 
   items: MenuItem[] | undefined;
+  visible!: boolean;
   
   constructor(private categoryService:CategoryService,private messageService:MessageService,private router:Router) { }
 
@@ -59,6 +60,10 @@ export class AddCategoryComponent implements OnInit {
       console.log(res);
       this.router.navigate(['/category']);
     })
+  }
+
+  showDialog(){
+    this.visible = true;
   }
 
 

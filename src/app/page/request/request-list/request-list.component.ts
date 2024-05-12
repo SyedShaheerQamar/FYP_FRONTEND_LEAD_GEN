@@ -31,6 +31,13 @@ export class RequestListComponent implements OnInit {
     this.userRequestService.getAllUserRequest().subscribe((res:UserRequest[])=>{
       this.request=res;
       console.log(this.request);
+
+      for(var i=0; i<res.length; i++){
+        const specificItem = res[i];
+        const categoryNames = specificItem.category.map(category => category.categoryName);
+        this.request[i].categoryName = categoryNames;
+      }
+      
       
     },error=>{
       this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.body });

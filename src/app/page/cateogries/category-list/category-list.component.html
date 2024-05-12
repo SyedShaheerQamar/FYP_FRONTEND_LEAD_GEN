@@ -9,14 +9,6 @@
             <p-breadcrumb class="max-w-full" [model]="items"></p-breadcrumb>
         </div>
         <div class="body-card">
-          <div class="order-body">
-            <div class="order-search-panel">
-              <input 
-              type="text" 
-              placeholder="Search By Category" 
-              class="order-search form-control">
-            </div>
-          </div>
           <p-toast></p-toast>
             <div class="table-head">
                 <p-toolbar>
@@ -50,7 +42,7 @@
                   <td class="text-center">{{ itemCategory.id }}</td>
                   <td class="text-center">{{ itemCategory.categoryName }}</td>
                   <td class="text-center">{{ itemCategory.icons == null ? "No Icon" : itemCategory.icons }}</td>
-                  <td class="text-center">{{ itemCategory.backgorund == null ? "No Backgorund" : itemCategory.backgorund }}</td>
+                  <td class="text-center">{{ itemCategory.backgroundColor == null ? "No Backgorund" : itemCategory.backgroundColor }}</td>
                   <td class="text-center"> 
                     <!-- <p-button  icon="bi bi-pen" class='mr' styleClass="p-button-rounded p-button-success p-button-text p-button-raised">
                      
