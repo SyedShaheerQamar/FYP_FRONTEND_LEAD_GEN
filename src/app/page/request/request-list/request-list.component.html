@@ -26,7 +26,7 @@
                   <th class="text-center">Id</th>
                   <th class="text-center">Request</th>
                   <th class="text-center">Approved by System</th>
-                  <th class="text-center">Approved by Admin</th>
+                  <th class="text-center">Needs Approved by Admin</th>
                   <th class="text-center">Price</th>
                   <th class="text-center">Category</th>
                   <th class="text-center">Bids</th>
@@ -36,7 +36,7 @@
               <ng-template pTemplate="body" let-request>
                 <tr>
                   <td class="text-center">{{ request.id }}</td>
-                  <td class="text-center">{{ request.request }}</td>
+                  <td (click)="showRequest(request.id)" id="request_u" class="text-center">{{ request.request }}</td>
                   <td class="text-center">{{ request.approvedBySystem }}</td>
                   <td class="text-center">{{ request.approvedByAdmin }}</td>
                   <td class="text-center">{{ request.price }}</td>
@@ -44,7 +44,7 @@
                   <td class="text-center">{{ request.bids==[]?request.bids:"No bids" }}</td>
 
                   <td class="text-center"> 
-                    <p-button *ngIf="!request.approvedByAdmin" (click)="showDialogForApprove(request.id)" icon="bi bi-check2" class='mr' styleClass="p-button-rounded p-button-success p-button-text p-button-raised">
+                    <p-button *ngIf="request.approvedByAdmin || !request.approvedBySystem" (click)="showDialogForApprove(request.id)" icon="bi bi-check2" class='mr' styleClass="p-button-rounded p-button-success p-button-text p-button-raised">
                      
                     </p-button>
                      <p-button (click)="showDialog(request.id)" icon="bi bi-trash" class='ml' styleClass="p-button-rounded p-button-danger p-button-text p-button-raised">
@@ -77,4 +77,10 @@
   <p-button (click)="approveRequestByID(ApproveId)" class="bg-b-color">
     Approve
   </p-button>
+</p-dialog>
+
+<p-dialog header="Request" class="form-hook" [(visible)]="viewRequest" [style]="{width: '50vw'}">
+  <h4 class="mb-4">
+     {{ signleRequest }}
+  </h4>
 </p-dialog>

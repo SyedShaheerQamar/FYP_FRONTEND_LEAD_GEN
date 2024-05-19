@@ -21,6 +21,9 @@ export class RequestListComponent implements OnInit {
   lID!:number
   ApproveId!:number;
   approveVisible: boolean = false;
+  viewRequest: boolean = false;
+  signleRequest!: string;
+  dummy!: UserRequest[];
 
   ngOnInit() {
       this.items = [{ label: 'Request List'}];
@@ -30,13 +33,14 @@ export class RequestListComponent implements OnInit {
   getAllUserRequest(){
     this.userRequestService.getAllUserRequest().subscribe((res:UserRequest[])=>{
       this.request=res;
-      console.log(this.request);
 
       for(var i=0; i<res.length; i++){
         const specificItem = res[i];
         const categoryNames = specificItem.category.map(category => category.categoryName);
         this.request[i].categoryName = categoryNames;
       }
+
+      this.addElipses(this.request);
       
       
     },error=>{
@@ -59,6 +63,27 @@ export class RequestListComponent implements OnInit {
     this.visible = true;
   }
 
+  showRequest(id:number) {
+    this.viewRequest = true;
+    // for (let i = 0; i < this.request.length; i++) {
+    //   if (this.request[i].id === id) {
+    //     this.signleRequest =  this.request[i].request;
+    //   }
+    // }
+    
+    this.userRequestService.getAllUserRequest().subscribe((res:UserRequest[])=>{
+      this.dummy=res;
+      for (let i = 0; i < this.dummy.length; i++) {
+        if (this.dummy[i].id === id) {
+          this.signleRequest =  this.dummy[i].request;
+        }
+      }
+      
+    },error=>{
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.body });
+    })
+  }
+
   approveRequestByID(id:number){
     this.userRequestService.adminApproveUserRequsetByID(id).subscribe((res)=>{
       this.getAllUserRequest();
@@ -72,6 +97,17 @@ export class RequestListComponent implements OnInit {
   showDialogForApprove(id:number){
     this.ApproveId = id;
     this.approveVisible = true;
+  }
+
+  addElipses(requestInfo: UserRequest[]){
+    for(var i=0; i<this.request.length; i++){
+      console.log(this.request[i].request);
+      let val = new String(this.request[i].request);
+      
+      if(val.length > 30){
+        this.request[i].request = val.slice(0, 30) + "...";          
+      }
+    }
   }
 
 }
