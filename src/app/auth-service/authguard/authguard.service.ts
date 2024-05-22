@@ -26,7 +26,6 @@ export class AuthguardService {
 
 
   isAuthenticated(state: RouterStateSnapshot): boolean {
-    debugger
     const token = localStorage.getItem('accessToken');
 
     let userPermissions: string[]|null =null

@@ -12,7 +12,6 @@ export class UserService {
   url=environment.baseurl;
 
   GetAllUserFromDatabase():Observable<UserInformation[]>{
-    debugger
     return this.http.get<UserInformation[]>(this.url.concat("/user/getAll"));
   }
 

@@ -17,6 +17,9 @@ export class UserListComponent implements OnInit {
   visible: boolean = false;
   uID!:number
   userInfo!:UserInformation[];
+  selectedUser: UserInformation | undefined;
+  displayUserRequestsDialog: boolean = false;
+  displayUserReviewsDialog: boolean = false;
 
   constructor(private userService:UserService,private messageService:MessageService) { }
   
@@ -27,8 +30,12 @@ export class UserListComponent implements OnInit {
 
   getAllUser(){
     this.userService.GetAllUserFromDatabase().subscribe((res:UserInformation[]) => {      
+      console.log(res);
+      
       this.userInfo = res;
       this.addElipses(this.userInfo);
+
+      this.userInfo = this.userInfo.filter(user => user.email !== 'admin@gmail.com');
       
     },error=>{
         this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.body });
@@ -55,6 +62,7 @@ export class UserListComponent implements OnInit {
     this.userService.GetUserByStatus(status).subscribe((res:UserInformation[]) => {       
       this.userInfo = res;
       this.addElipses(this.userInfo);
+      this.userInfo = this.userInfo.filter(user => user.email !== 'admin@gmail.com');
       if(status == 1){
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Showing Active Users'});
       }else{
@@ -72,7 +80,6 @@ export class UserListComponent implements OnInit {
 
   addElipses(user : UserInformation[]){
     for(var i=0; i<this.userInfo.length; i++){
-      console.log(this.userInfo[i].deviceId);
       let val = new String(this.userInfo[i].deviceId);
       
       if(val.length > 30){
@@ -80,6 +87,16 @@ export class UserListComponent implements OnInit {
       }
     }
     
+  }
+
+  showUserRequestsDialog(user: UserInformation) {
+    this.selectedUser = user;
+    this.displayUserRequestsDialog = true;
+  }
+
+  showUserReviewsDialog(user: UserInformation){
+    this.selectedUser = user;
+    this.displayUserReviewsDialog = true;
   }
   
 }

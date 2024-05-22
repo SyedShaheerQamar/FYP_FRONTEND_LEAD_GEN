@@ -18,7 +18,6 @@ export class AuthService {
 
   
   login(credentials:any):Observable<any>{
-    console.log(credentials);
     
     return this.httpClient.post<any>(this.url.concat("/login"),credentials,httpOptions);
   }

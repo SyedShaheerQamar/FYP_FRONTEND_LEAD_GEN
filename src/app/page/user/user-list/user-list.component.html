@@ -15,14 +15,14 @@
                     <div class="p-toolbar-group-start">
                       <h2 class="h-color">User List</h2>
                     </div>
-                    <div class="p-toolbar-group-end">
+                    <!-- <div class="p-toolbar-group-end">
                         <p-button class="bg-b-color m-2" (click)="showUserByStatus(1)">
                           <i style="font-size: 20px;font-weight: bold;"></i>Active User
                         </p-button>
                         <p-button class="bg-b-color" (click)="showUserByStatus(0)">
                           <i style="font-size: 20px;font-weight: bold;"></i>Inactive User
                         </p-button>
-                    </div>
+                    </div> -->
                 </p-toolbar>
             </div>
           
@@ -37,7 +37,6 @@
                   <th class="text-center">Last Name</th>
                   <th class="text-center">Email</th>
                   <th class="text-center">Device Id</th>
-                  <th class="text-center">Location</th>
                   <th class="text-center">NIC</th>
                   <th class="text-center">Reviews</th>
                   <th class="text-center">User Requests</th>
@@ -53,10 +52,9 @@
                   <td class="text-center">{{ userInfo.lastName }} </td>
                   <td class="text-center">{{ userInfo.email }} </td>
                   <td class="text-center">{{ userInfo.deviceId!=null?userInfo.deviceId:"NULL" }} </td>
-                  <td class="text-center">{{ userInfo.locations==[]?userInfo.locations:"No location"}}</td>
                   <td class="text-center">{{ userInfo.nationalIdentificationNumber!=null?userInfo.nationalIdentificationNumber:"NULL" }} </td>
-                  <td class="text-center">{{ userInfo.reviews==[]?userInfo.reviews:"No reviews" }}</td>
-                  <td class="text-center">{{ userInfo.userRequests==[]?userInfo.userRequests:"No Request" }}</td>
+                  <td class="text-center" (click)="showUserReviewsDialog(userInfo)">{{ userInfo.reviews.length }}</td>
+                  <td class="text-center" (click)="showUserRequestsDialog(userInfo)">{{ userInfo.userRequests.length }}</td>
                   <td class="text-center">{{ userInfo.userType!=null?userInfo.userType:"NULL" }}</td>
                   <td class="text-center"> 
                     
@@ -82,4 +80,24 @@
   <p-button (click)="deleteUserByID(uID)" class="bg-b-color">
     <i  class="bi bi-trash" style="font-size: 20px;font-weight: bold;"></i>&nbsp;Confirm Delete
   </p-button>
+</p-dialog>
+
+<p-dialog header="User Requests" [(visible)]="displayUserRequestsDialog" [style]="{width: '50vw'}">
+  <ng-container *ngIf="selectedUser">
+    <ul class="user-requests-list">
+      <li *ngFor="let request of selectedUser.userRequests">
+        {{ request | json }}
+      </li>
+    </ul>
+  </ng-container>
+</p-dialog>
+
+<p-dialog header="User Reviews" [(visible)]="displayUserReviewsDialog" [style]="{width: '50vw'}">
+  <ng-container *ngIf="selectedUser">
+    <ul class="user-reviews-list">
+      <li *ngFor="let review of selectedUser.reviews">
+        {{ review | json }}
+      </li>
+    </ul>
+  </ng-container>
 </p-dialog>

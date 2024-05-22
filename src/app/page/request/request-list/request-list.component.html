@@ -41,7 +41,7 @@
                   <td class="text-center">{{ request.approvedByAdmin }}</td>
                   <td class="text-center">{{ request.price }}</td>
                   <td class="text-center">{{ request.categoryName!=null?request.categoryName:"Not available" }}</td>
-                  <td class="text-center">{{ request.bids==[]?request.bids:"No bids" }}</td>
+                  <td class="text-center">{{ request.bids.length }}</td>
 
                   <td class="text-center"> 
                     <p-button *ngIf="request.approvedByAdmin || !request.approvedBySystem" (click)="showDialogForApprove(request.id)" icon="bi bi-check2" class='mr' styleClass="p-button-rounded p-button-success p-button-text p-button-raised">

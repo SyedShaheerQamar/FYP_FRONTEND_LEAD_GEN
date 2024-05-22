@@ -102,4 +102,30 @@
       height:35px ;
       margin: 0 5px;
   }
+
+  .user-requests-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .user-requests-list li {
+    font-size: 16px;
+    padding: 10px;
+    background-color: #f5f5f5;
+    margin-bottom: 5px;
+    border-radius: 5px;
+  }
+
+  .user-reviews-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .user-reviews-list li {
+    font-size: 16px;
+    padding: 10px;
+    background-color: #f5f5f5;
+    margin-bottom: 5px;
+    border-radius: 5px;
+  }
   

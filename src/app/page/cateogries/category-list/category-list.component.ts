@@ -15,7 +15,6 @@ export class CategoryListComponent implements OnInit {
   visible!: boolean;
   dId!:number;
   items: MenuItem[] | undefined;
-  // drivers!:Driver[];
   itemCategory!:Category[];
 
   constructor(private categoryService:CategoryService,private messageService:MessageService) { }

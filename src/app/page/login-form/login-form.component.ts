@@ -19,7 +19,7 @@ export class LoginFormComponent implements OnInit {
     localStorage.clear();
   }
   
-  phoneNumber!:string
+  email!:string
   password!:string
   error:boolean=false;
   
@@ -27,8 +27,6 @@ export class LoginFormComponent implements OnInit {
   login(credentials:any){
     
     this.authService.login(credentials).subscribe((res:any)=>{
-      debugger
-      console.log(res);
       
       localStorage.setItem("accessToken", res.jwt);
       

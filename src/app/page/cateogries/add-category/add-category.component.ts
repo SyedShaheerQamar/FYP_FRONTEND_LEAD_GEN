@@ -6,7 +6,7 @@ import { Dropdown } from 'primeng/dropdown';
 import { Category } from 'src/app/model/category';
 
 @Component({
-  selector: 'app-add-driver',
+  selector: 'app-add-category',
   templateUrl: './add-category.component.html',
   styleUrls: ['./add-category.component.scss'],
   providers:[MessageService],
@@ -23,22 +23,10 @@ export class AddCategoryComponent implements OnInit {
 
   Categoryname!:string;
   category!: Category;
+  itemCategory!:Category[];
 
-  icons: any = [
-    { name: 'TEST 1' },
-    { name: 'TEST 2' },
-    { name: 'TEST 3' },
-    { name: 'TEST 4' },
-    { name: 'TEST 5' }
-  ];
-
-  background: any = [
-    { name: 'TEST 1' },
-    { name: 'TEST 2' },
-    { name: 'TEST 3' },
-    { name: 'TEST 4' },
-    { name: 'TEST 5' }
-  ];
+  icons: any = [];
+  background: any = [];
 
   selectedIcon: any;
   selectedBackground: any;
@@ -46,7 +34,55 @@ export class AddCategoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.items = [{ label: 'Category List',routerLink:'/category'},{ label: 'Add Category'}];
+    this.getCategory();
   }
+
+  getCategory(){
+    this.categoryService.getAllCategory().subscribe((res:Category[])=>{
+     this.itemCategory=res;    
+
+     this.populateDropdowns();
+     
+    },error=>{
+     this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.body });
+    })
+   }
+
+  //  populateDropdowns() {
+  //   // Populate the icons dropdown with category names
+  //   this.icons = this.itemCategory.map((category) => {
+  //     return { name: category.icons };
+  //   });
+
+  //   // Populate the background dropdown with category names
+  //   this.background = this.itemCategory.map((category) => {
+  //     return { name: category.backgroundColor };
+  //   });
+  // }
+
+  populateDropdowns() {
+    const categoryNamesSet = new Set<string>();
+  
+    // Populate the icons dropdown with unique category names
+    this.icons = [];
+    this.itemCategory.forEach(category => {
+      if (!categoryNamesSet.has(category.icons)) {
+        categoryNamesSet.add(category.icons);
+        this.icons.push({ name: category.icons });
+      }
+    });
+  
+    // Populate the background dropdown with unique category names
+    this.background = [];
+    this.itemCategory.forEach(category => {
+      if (!categoryNamesSet.has(category.backgroundColor)) {
+        categoryNamesSet.add(category.backgroundColor);
+        this.background.push({ name: category.backgroundColor });
+      }
+    });
+  }
+  
+  
 
   onSubmit() {
     this.category = {
@@ -57,7 +93,6 @@ export class AddCategoryComponent implements OnInit {
     };
     
     this.categoryService.saveCateogry(this.category).subscribe((res: any) => {
-      console.log(res);
       this.router.navigate(['/category']);
     })
   }

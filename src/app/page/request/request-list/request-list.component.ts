@@ -101,7 +101,6 @@ export class RequestListComponent implements OnInit {
 
   addElipses(requestInfo: UserRequest[]){
     for(var i=0; i<this.request.length; i++){
-      console.log(this.request[i].request);
       let val = new String(this.request[i].request);
       
       if(val.length > 30){

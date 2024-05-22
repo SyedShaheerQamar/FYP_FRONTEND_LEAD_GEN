@@ -9,7 +9,7 @@
             <h2 class="text-center">Login</h2>
             <div class="flex flex-column gap-2 mt-3">
                 <label htmlFor="name">Username</label>
-                <input pInputText id="name" aria-describedby="name-help" [(ngModel)]="phoneNumber"  [ngModelOptions]="{standalone:true}" />
+                <input pInputText id="name" aria-describedby="name-help" [(ngModel)]="email"  [ngModelOptions]="{standalone:true}" />
                 <small id="username-help" class="r-color" *ngIf="error">Invalid Username.</small>
             </div>
             <div class="flex flex-column gap-2 mt-3 form-hook">
@@ -18,7 +18,7 @@
                 <small id="username-help" class="r-color" *ngIf="error">Invalid password.</small>
             </div>
             <div class="flex justify-content-center mt-3 ">
-                <p-button (click)="login({phoneNumber:phoneNumber,password:password})" label="Confirm" class="bg-p-color ml" >
+                <p-button (click)="login({email:email,password:password})" label="Confirm" class="bg-p-color ml" >
                 </p-button>
             </div>
         </div>
