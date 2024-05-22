@@ -36,60 +36,30 @@ export class DashboardComponent implements OnInit {
     this.getAllUserRequest();
     this.getCategory();
 
-    this.data = {
-        labels: ['A', 'B', 'C'],
-        datasets: [
-            {
-                data: [300, 50, 100],
-                backgroundColor: ["#4099ff","#2ed8b6", "#FFB64D"],
-                hoverBackgroundColor: ["#73b4ff","#59e0c5","#ffcb80"]
-            }
-        ]
-    };
-
-
-    this.options = {
-        cutout: '60%',
-        plugins: {
-            legend: {
-                labels: {
-                    color: textColor,
-                    usePointStyle: true,
-                
-                },
-                position:'bottom'
-            }
-        }
-    };
-
     const documentStyle1= getComputedStyle(document.documentElement);
     const textColor1 = documentStyle.getPropertyValue('--text-color');
     const textColorSecondary1= documentStyle.getPropertyValue('--text-color-secondary');
     const surfaceBorder1= documentStyle.getPropertyValue('--surface-border');
     
     this.data1= {
-        // , 'February', 'March', 'April', 'May', 'June', 'July'
         labels: ['Overall'],
         datasets: [
             {
                 label: 'Users',
                 backgroundColor:'#4099ff',
                 borderColor:'#4099ff',
-                // , 59, 80, 81, 56, 55, 40
                 data: [65]
             },
             {
                 label: 'Category',
                 backgroundColor:'#FF5370',
                 borderColor:'#FF5370',
-                // , 48, 40, 19, 86, 27, 90
                 data: [28]
             },
             {
                 label: 'Requests',
                 backgroundColor:'#59e0c5',
                 borderColor:'#59e0c5',
-                // , 48, 40, 19, 86, 27, 90
                 data: [28]
             }
         ]
@@ -137,22 +107,18 @@ export class DashboardComponent implements OnInit {
   getAllUser(){
     this.userService.GetAllUserFromDatabase().subscribe((res:UserInformation[]) => {
         this.userLength = res.length;
-
     });
    }
 
    getAllUserRequest(){
     this.userRequestService.getAll().subscribe((res:UserRequest[])=>{
-      this.requestLength=res.length;
-      
+      this.requestLength=res.length;      
     })
   }
 
   getCategory(){
     this.categoryService.getAllCategory().subscribe((res:Category[])=>{    
-     this.categoryLength=res.length;
-     
-     
+     this.categoryLength=res.length;   
     })
    }
 
