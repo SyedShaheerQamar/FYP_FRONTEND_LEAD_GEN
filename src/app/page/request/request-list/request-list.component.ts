@@ -65,11 +65,6 @@ export class RequestListComponent implements OnInit {
 
   showRequest(id:number) {
     this.viewRequest = true;
-    // for (let i = 0; i < this.request.length; i++) {
-    //   if (this.request[i].id === id) {
-    //     this.signleRequest =  this.request[i].request;
-    //   }
-    // }
     
     this.userRequestService.getAllUserRequest().subscribe((res:UserRequest[])=>{
       this.dummy=res;
