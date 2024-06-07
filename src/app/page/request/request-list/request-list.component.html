@@ -15,14 +15,17 @@
                     <div class="p-toolbar-group-start">
                       <h2 class="h-color">Request List</h2>
                     </div>
+                    <div class="p-toolbar-group-end">
+                      <p-button label="Requests" (click)="toggleValidApprovedRequests()" class="p-button-outlined"></p-button>
+                      <p-button label="Deleted Requests" (click)="toggleDeletedRequests()" class="p-button-outlined ml-2"></p-button>
+                    </div>
                 </p-toolbar>
             </div>
 
           <div class="card">
-            <p-table [value]="request" [tableStyle]="{ 'min-width': '50rem' }">
+            <p-table  [value]="request" [tableStyle]="{ 'min-width': '50rem' }">
               <ng-template pTemplate="header">
                 <tr>
-                  
                   <th class="text-center">Id</th>
                   <th class="text-center">Request</th>
                   <th class="text-center">Approved by System</th>
@@ -42,14 +45,9 @@
                   <td class="text-center">{{ request.price }}</td>
                   <td class="text-center">{{ request.categoryName!=null?request.categoryName:"Not available" }}</td>
                   <td class="text-center">{{ request.bids.length }}</td>
-
                   <td class="text-center"> 
-                    <p-button *ngIf="request.approvedByAdmin || !request.approvedBySystem" (click)="showDialogForApprove(request.id)" icon="bi bi-check2" class='mr' styleClass="p-button-rounded p-button-success p-button-text p-button-raised">
-                     
-                    </p-button>
-                     <p-button (click)="showDialog(request.id)" icon="bi bi-trash" class='ml' styleClass="p-button-rounded p-button-danger p-button-text p-button-raised">
-                    
-                     </p-button>
+                    <p-button *ngIf="request.approvedByAdmin || !request.approvedBySystem" (click)="showDialogForApprove(request.id)" icon="bi bi-check2" class='mr' styleClass="p-button-rounded p-button-success p-button-text p-button-raised"></p-button>
+                    <p-button (click)="showDialog(request.id)" icon="bi bi-trash" class='ml' styleClass="p-button-rounded p-button-danger p-button-text p-button-raised"></p-button>
                   </td>
                 </tr>
               </ng-template>

@@ -30,4 +30,9 @@ export class RequestService {
   adminApproveUserRequsetByID(id:number):Observable<UserRequest>{
     return this.http.put<UserRequest>(this.url.concat('/userRequest/setApproval/',id.toString()), null);
   }
+
+  getAllDeletedRequests():Observable<UserRequest[]>{
+    return this.http.get<UserRequest[]>(this.url.concat('/userRequest/getAllDeletedRequests'));
+  }
+
 }

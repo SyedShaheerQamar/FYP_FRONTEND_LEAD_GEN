@@ -104,4 +104,29 @@ export class RequestListComponent implements OnInit {
     }
   }
 
+  toggleValidApprovedRequests() {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Showing Requests'});
+    this.getAllUserRequest();
+  }
+
+  toggleDeletedRequests() {
+    
+    this.userRequestService.getAllDeletedRequests().subscribe((res:UserRequest[])=>{
+      this.request=res;
+      console.log(this.request);
+      
+      for(var i=0; i<res.length; i++){
+        const specificItem = res[i];
+        const categoryNames = specificItem.category.map(category => category.categoryName);
+        this.request[i].categoryName = categoryNames;
+      }
+
+      this.addElipses(this.request);
+      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Showing Deleted Requests'});
+      
+    },error=>{
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.body });
+    })
+  }
+
 }
